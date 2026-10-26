@@ -1,0 +1,58 @@
+Object pool: 
+
+All bullets shot out of the player are stored and called from the pool itself. The game doesn't create a new game object, it just calls it from the pool. Bullet lifetime despawns the bullet and puts it back into the pool 
+
+Builder Pattern: 
+This creates the different types of targets and lays them out randomly instead of having to manually place them in the scene. You could use a random range with an array or a list but that wouldn't build different types of objects. This one builds the static, moving and small targets from the set properties coded in. 
+
+Observer Pattern: 
+This takes care of the scoring and the target spawner. There is a set amount of targets that can be present in the scene at a given time. The target spawner spawns to the limited amount, and the observer just waits to see whenever that max is not the max anymore and is able to spawn more to reach that max. At the same time, it checks when a target has been destroyed and updated the score as well depending on the score that was set in the builder pattern. 
+
+
+
+              AIM TRAINER CLASS DIAGRAM
+
+                  [BulletPool]
+                       |
+                       v
+                    [Bullet]
+                       |
+                       | Hits
+                       v
+                    [Target]
+                       |
+                       | OnTargetHit Event
+                       |
+                +------+------+
+                |             |
+                v             v
+          [ScoreManager] [TargetSpawner]
+                              |
+                              | Uses
+                              v
+                       [TargetBuilder]
+                              |
+                              | Creates
+                              v
+                           [Target]
+
+
+              DESIGN PATTERNS USED
+
+Object Pool:
+PlayerShoot --> BulletPool --> Bullet
+
+Builder:
+TargetSpawner --> TargetBuilder --> Target
+
+Observer:
+Target --> OnTargetHit
+                |
+                +--> ScoreManager
+                |
+                +--> TargetSpawner
+
+Game Management:
+GameManager --> PlayerShoot
+GameManager --> TargetSpawner
+GameManager --> Timer UI
