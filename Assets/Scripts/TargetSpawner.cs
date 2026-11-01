@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System.Collections.Generic;
 public class TargetSpawner : MonoBehaviour
 {
     public GameObject targetPrefab;
@@ -9,6 +9,8 @@ public class TargetSpawner : MonoBehaviour
     public Vector2 spawnRangeY = new Vector2(-5, 5f);
 
     public int maxTargets = 5;
+
+    public List<GameObject> spawnTarget = new List<GameObject>();
 
     private float nextSpawnTime;
     private int targetCount;
@@ -52,12 +54,40 @@ public class TargetSpawner : MonoBehaviour
 
         }
 
-        builder.Build();
+        GameObject target = builder.Build();
+        spawnTarget.Add(target);
         targetCount++;
 
     }
     private void TargetHit(int points)
     {
         targetCount--;
+    }
+    public void RestoreTargets(List<TransformSaver.TargetData> savedTargets)
+    {
+        foreach (GameObject target in spawnTarget)
+        {
+            if (target != null)
+                Destroy(target);
+        }
+
+        spawnTarget.Clear(); 
+        targetCount = 0;
+
+        foreach (TransformSaver.TargetData data in savedTargets)
+        {
+            TargetBuilder builder = new TargetBuilder(targetPrefab, data.position);
+
+            builder.SetPoints(data.points).SetSize(data.size).SetMovement(data.isMoving, data.moveSpeed, data.moveDistance);
+
+            GameObject target = builder.Build();
+
+            target.transform.position = data.position;
+
+            spawnTarget.Add(target);
+            targetCount++;
+        }
+
+        nextSpawnTime = Time.time + spawnInterval;
     }
 }

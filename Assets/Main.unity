@@ -279,7 +279,8 @@ MonoBehaviour:
   spawnInterval: 1
   spawnRangeX: {x: -15, y: 15}
   spawnRangeY: {x: -10, y: 10}
-  maxTargets: 7
+  maxTargets: 5
+  spawnTarget: []
 --- !u!4 &412198453
 Transform:
   m_ObjectHideFlags: 0
@@ -432,6 +433,53 @@ RectTransform:
   m_AnchoredPosition: {x: 16, y: -456}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &730241994
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 730241996}
+  - component: {fileID: 730241995}
+  m_Layer: 0
+  m_Name: SaveManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &730241995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730241994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 351c18ec6a29f5849a4d01e7b7297db3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TransformSaver
+  player: {fileID: 1760522430}
+  spawner: {fileID: 412198452}
+  scoreManager: {fileID: 1155145001}
+--- !u!4 &730241996
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730241994}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 29.39281, y: 0, z: 7.88569}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &737688521
 GameObject:
   m_ObjectHideFlags: 0
@@ -1400,3 +1448,4 @@ SceneRoots:
   - {fileID: 1155145002}
   - {fileID: 412198453}
   - {fileID: 1663689778}
+  - {fileID: 730241996}

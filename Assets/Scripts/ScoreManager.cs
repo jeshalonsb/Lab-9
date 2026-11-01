@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using Unity.Mathematics;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -27,5 +28,15 @@ public class ScoreManager : MonoBehaviour
     private void UpdateScore()
     {
         scoreText.text = "Score: " + score;
+    }
+    public int GetScore()
+    {
+        return score;
+    }
+
+    public void SetScore(int newScore)
+    {
+        score = newScore;
+        UpdateScore();
     }
 }
